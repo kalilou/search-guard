@@ -10,13 +10,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       search.vm.hostname = "elk-server"
       search.vm.network "private_network", ip: "192.168.50.200"
       search.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
+      config.vm.synced_folder "synced_folder", "/home/vagrant/synced_folder", type: "nfs"
       search.ssh.forward_agent = true
       search.ssh.insert_key = false
       search.ssh.private_key_path = ["~/.vagrant.d/insecure_private_key" ] 
 
       config.vm.provider "virtualbox" do |v|
-          v.memory = 8024
+          v.memory = 4024
           v.cpus = 2
+          v.name = "elk"
       end
     end
 
